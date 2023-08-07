@@ -1,32 +1,46 @@
-// q: what does solid stand for in oo programming?
-// a: solid stands for single responsibility, open-closed, liskov substitution, interface segregation, and dependency inversion.
+// Sample data for the table
+const tableData = [
+  { name: "John Doe", age: 30, city: "New York" },
+  { name: "Jane Smith", age: 25, city: "San Francisco" },
+  { name: "Bob Johnson", age: 35, city: "Chicago" },
+];
 
-// write a program in jsvascript to convert meter to feet
-// 1 meter = 3.28084 feet
-// 1 feet = 0.3048 meter
+function buildTableGrid(data) {
+  const tableContainer = document.getElementById("tableContainer");
+  const table = document.createElement("table");
+  const tableHead = document.createElement("thead");
+  const tableBody = document.createElement("tbody");
 
-// q: write a program in javascript to convert meter to feet
-// a:
-function meterToFeet(meter) {
-    return meter * 3.28084;
+  // Create table header row
+  const headerRow = document.createElement("tr");
+  for (let key in data[0]) {
+    const th = document.createElement("th");
+    th.textContent = key;
+    headerRow.appendChild(th);
+  }
+  tableHead.appendChild(headerRow);
+
+  // Create table rows for data
+  data.forEach((item) => {
+    const dataRow = document.createElement("tr");
+    for (let key in item) {
+      const td = document.createElement("td");
+      td.textContent = item[key];
+      dataRow.appendChild(td);
     }
-    console.log(meterToFeet(1));
-    console.log(meterToFeet(2));
+    tableBody.appendChild(dataRow);
+  });
 
-    //q: how to run this program?
-// q: how to run this program? 
-// a: node test.js
+  // Append the table header and body to the table
+  table.appendChild(tableHead);
+  table.appendChild(tableBody);
 
+  // Add CSS styling to the table
+  table.style.borderCollapse = "collapse";
+  table.style.border = "1px solid black";
 
-// write a program to build a date picker
-// q: write a program to build a date picker
-// a:       <input type="date" id="datePicker">
-//         <script>
-//             const datePicker = document.getElementById('datePicker');
+  tableContainer.appendChild(table);
+}
 
-//             datePicker.addEventListener('change', (event) => {
-//                 const result = document.getElementById('result');
-//                 result.textContent = `Date is ${event.target.value}`;    
-//             });
-//         </script>
-
+// Call the function with the sample data to build the table
+buildTableGrid(tableData);
